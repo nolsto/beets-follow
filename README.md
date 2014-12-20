@@ -52,24 +52,24 @@ follow:
     auto: yes
 ```
 
-Setting the auto option will also unfollow an artist if all of their albums have been removed from your library.
+Setting the `auto` option will also unfollow an artist if all of their albums have been removed from your library.
 
 ## Commands
 
-- follow
+- ### follow
 
   ```beet follow [query]```
-  
+
   Query can be any string following Beets' [query string syntax](http://beets.readthedocs.org/en/latest/reference/query.html).
-  
+
   All matched items will have their album artist (if one exists) added to muspy.
-  
+
   If no query is included, all artists in your library will be added to muspy.
 
-- unfollow
+- ### unfollow
 
   ```beet unfollow [query]```
-  
+
   Similar to follow, all matched items will have their album artist (if one exists) removed from muspy.
-  
+
   If no query is included, all artists in your library will be removed from muspy.
