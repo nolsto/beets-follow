@@ -26,7 +26,7 @@ To use muspy's API, the follow plugin must be configured with the email address 
 
 Run this script remotely in a shell
 ```sh
-bash <(curl -fsSL https://gist.githubusercontent.com/nolsto/4f1680d095b744662f3c/raw/2ff1d7dd732899f72f5f6e211c0441420d515a98/get_muspy_userid.sh)
+bash <(curl -fsSL https://raw.githubusercontent.com/nolsto/beets-follow/master/get_muspy_userid.sh)
 ```
 or clone this repository and run the script locally in a shell.
 ```sh
