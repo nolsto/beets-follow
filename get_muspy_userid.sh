@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 read -p "Your muspy email: " email
 read -p "Your muspy password: " password

@@ -10,7 +10,7 @@ from beets.util import confit
 
 log = logging.getLogger('beets')
 
-plugin_uri = 'https://example.com/'
+plugin_uri = 'https://github.com/nolsto/beets-follow/'
 muspy_uri = 'https://muspy.com/api/1/'
 password_mgr = urllib2.HTTPPasswordMgrWithDefaultRealm()
 opener = urllib2.build_opener(urllib2.HTTPBasicAuthHandler(password_mgr))
@@ -49,9 +49,7 @@ def get_credentials():
         password = config['follow']['password'].get()
         userid = config['follow']['userid'].get()
     except confit.NotFoundError, e:
-        err = e
-        if 'userid' in str(e):
-            err = '%s. Please see %s.' % (e, plugin_uri)
+        err = '%s. Please see %s' % (e, plugin_uri + '#muspy-configuration')
         raise ui.UserError(err)
     return (email, password, userid)
 
