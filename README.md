@@ -51,8 +51,7 @@ Add the `auto` option to the follow section of your Beets config.yaml to automat
 follow:
     auto: yes
 ```
-
-Setting the `auto` option will also unfollow an artist if all of their albums have been removed from your library.
+Setting the `auto` option will also unfollow an artist after an album removal if none of the artist's albums remain in your library.
 
 ## Commands
 

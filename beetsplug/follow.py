@@ -10,8 +10,8 @@ from beets.util import confit
 
 log = logging.getLogger('beets')
 
-plugin_uri = 'https://github.com/nolsto/beets-follow/'
-muspy_uri = 'https://muspy.com/api/1/'
+plugin_home = 'https://github.com/nolsto/beets-follow/'
+muspy_api = 'https://muspy.com/api/1/'
 password_mgr = urllib2.HTTPPasswordMgrWithDefaultRealm()
 opener = urllib2.build_opener(urllib2.HTTPBasicAuthHandler(password_mgr))
 
@@ -31,7 +31,7 @@ def credentials_required(func):
 
 
 def password_is_managed():
-    return password_mgr.find_user_password(None, muspy_uri) != (None, None)
+    return password_mgr.find_user_password(None, muspy_api) != (None, None)
 
 
 def manage_password():
@@ -40,7 +40,7 @@ def manage_password():
     except ui.UserError, e:
         raise
     else:
-        password_mgr.add_password(None, muspy_uri, email, password)
+        password_mgr.add_password(None, muspy_api, email, password)
 
 
 def get_credentials():
@@ -49,7 +49,7 @@ def get_credentials():
         password = config['follow']['password'].get()
         userid = config['follow']['userid'].get()
     except confit.NotFoundError, e:
-        err = '%s. Please see %s' % (e, plugin_uri + '#muspy-configuration')
+        err = '%s. Please see %s' % (e, plugin_home + '#muspy-configuration')
         raise ui.UserError(err)
     return (email, password, userid)
 
@@ -58,7 +58,7 @@ def get_credentials():
 def follow_artist(artistid, artist):
     userid = config['follow']['userid'].get()
     endpoint = '/'.join(('artists', userid, artistid))
-    request = urllib2.Request(muspy_uri + endpoint)
+    request = urllib2.Request(muspy_api + endpoint)
     request.get_method = lambda: 'PUT'
     try:
         response = opener.open(request)
@@ -72,7 +72,7 @@ def follow_artist(artistid, artist):
 def unfollow_artist(artistid, artist):
     userid = config['follow']['userid'].get()
     endpoint = '/'.join(('artists', userid, artistid))
-    request = urllib2.Request(muspy_uri + endpoint)
+    request = urllib2.Request(muspy_api + endpoint)
     request.get_method = lambda: 'DELETE'
     try:
         response = opener.open(request)
