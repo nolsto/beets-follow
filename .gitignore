@@ -1,1 +1,4 @@
 *.pyc
+*.egg-info
+README.rst
+dist/

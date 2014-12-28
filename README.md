@@ -4,13 +4,12 @@ Plugin for the music library manager, [Beets](http://beets.radbox.org/). Get not
 
 ## Installation
 
-Download the plugin to a folder included in your Beets [pluginpath](http://beets.readthedocs.org/en/latest/reference/config.html#pluginpath).
-```sh
-wget https://raw.githubusercontent.com/nolsto/beets-follow/master/follow.py
-```
+```pip install beets-follow```
 or
 ```sh
-curl -o follow.py https://raw.githubusercontent.com/nolsto/beets-follow/master/follow.py
+git clone https://github.com/nolsto/beets-follow.git
+cd beets-follow
+python setup.py install
 ```
 
 ## Configuration
@@ -22,21 +21,12 @@ plugins: follow
 
 ### muspy Configuration
 
-To use muspy's API, the follow plugin must be configured with the email address and password you used to register with muspy. It will also need your muspy User ID. If you do not know your User ID, either:
+To use muspy's API, the follow plugin must be configured with the email address and password you used to register with muspy. It will also need your muspy User ID. If you do not know your User ID,
 
-Run this script remotely in a shell
-```sh
-bash <(curl -fsSL https://raw.githubusercontent.com/nolsto/beets-follow/master/get_muspy_userid.sh)
-```
-or clone this repository and run the script locally in a shell.
-```sh
-git clone https://github.com/nolsto/beets-follow.git
-cd beets-follow
-chmod +x get_muspy_userid.sh
-./get_muspy_userid.sh
-```
+Sign in to muspy.com and click the Subscribe in a reader link (the RSS icon in the subnavigation). Your user ID can be extracted from the resulting URL:
+```https://muspy.com/feed?id=<your userid>```
 
-The script will output a snippet of YAML. Add it to your Beets config.yaml.
+Add the following to your Beets config.yaml.
 ```yaml
 follow:
     email: <your email>
@@ -55,20 +45,20 @@ Setting the `auto` option will also unfollow an artist after an album removal if
 
 ## Commands
 
-- ### follow
+### follow
 
-  ```beet follow [query]```
+```beet follow [query]```
 
-  Query can be any string following Beets' [query string syntax](http://beets.readthedocs.org/en/latest/reference/query.html).
+Query can be any string following Beets' [query string syntax](http://beets.readthedocs.org/en/latest/reference/query.html).
 
-  All matched items will have their album artist (if one exists) added to muspy.
+All matched items will have their album artist (if one exists) added to muspy.
 
-  If no query is included, all artists in your library will be added to muspy.
+If no query is included, all artists in your library will be added to muspy.
 
-- ### unfollow
+### unfollow
 
-  ```beet unfollow [query]```
+```beet unfollow [query]```
 
-  Similar to follow, all matched items will have their album artist (if one exists) removed from muspy.
+Similar to follow, all matched items will have their album artist (if one exists) removed from muspy.
 
-  If no query is included, all artists in your library will be removed from muspy.
+If no query is included, all artists in your library will be removed from muspy.
