@@ -4,8 +4,9 @@ Plugin for the music library manager, [Beets](http://beets.radbox.org/). Get not
 
 ## Installation
 
-```pip install beets-follow```
-
+```sh
+pip install beets-follow
+```
 or
 ```sh
 git clone https://github.com/nolsto/beets-follow.git
