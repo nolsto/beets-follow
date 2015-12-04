@@ -122,6 +122,10 @@ class FollowPlugin(BeetsPlugin):
 
         self.config.add({'auto': False})
 
+        self.config['email'].redact = True
+        self.config['password'].redact = True
+        self.config['userid'].redact = True
+
         if self.config['auto']:
             self.register_listener('album_imported', follow_added_artist)
             self.register_listener('item_removed', track_removed_artists)
