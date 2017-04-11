@@ -1,5 +1,5 @@
 import logging
-import urllib2
+import urllib.request, urllib.error, urllib.parse
 
 from functools import wraps
 
@@ -12,8 +12,8 @@ log = logging.getLogger('beets')
 
 plugin_home = 'https://github.com/nolsto/beets-follow/'
 muspy_api = 'https://muspy.com/api/1/'
-password_mgr = urllib2.HTTPPasswordMgrWithDefaultRealm()
-opener = urllib2.build_opener(urllib2.HTTPBasicAuthHandler(password_mgr))
+password_mgr = urllib.request.HTTPPasswordMgrWithDefaultRealm()
+opener = urllib.request.build_opener(urllib.request.HTTPBasicAuthHandler(password_mgr))
 
 added_artists = {}
 removed_artists = {}
@@ -37,7 +37,7 @@ def password_is_managed():
 def manage_password():
     try:
         (email, password, userid) = get_credentials()
-    except ui.UserError, e:
+    except ui.UserError:
         raise
     else:
         password_mgr.add_password(None, muspy_api, email, password)
@@ -48,7 +48,7 @@ def get_credentials():
         email = config['follow']['email'].get()
         password = config['follow']['password'].get()
         userid = config['follow']['userid'].get()
-    except confit.NotFoundError, e:
+    except confit.NotFoundError as e:
         err = '%s. Please see %s' % (e, plugin_home + '#muspy-configuration')
         raise ui.UserError(err)
     return (email, password, userid)
@@ -58,11 +58,11 @@ def get_credentials():
 def follow_artist(artistid, artist):
     userid = config['follow']['userid'].get()
     endpoint = '/'.join(('artists', userid, artistid))
-    request = urllib2.Request(muspy_api + endpoint)
+    request = urllib.request.Request(muspy_api + endpoint)
     request.get_method = lambda: 'PUT'
     try:
         response = opener.open(request)
-    except urllib2.URLError, e:
+    except urllib.error.URLError as e:
         log.error('Unable to follow %s. %s' % (artist, e))
     else:
         log.info('Followed %s' % artist)
@@ -72,11 +72,11 @@ def follow_artist(artistid, artist):
 def unfollow_artist(artistid, artist):
     userid = config['follow']['userid'].get()
     endpoint = '/'.join(('artists', userid, artistid))
-    request = urllib2.Request(muspy_api + endpoint)
+    request = urllib.request.Request(muspy_api + endpoint)
     request.get_method = lambda: 'DELETE'
     try:
         response = opener.open(request)
-    except urllib2.URLError, e:
+    except urllib.error.URLError as e:
         log.error('Unable to unfollow %s. %s' % (artist, e))
     else:
         log.info('Unfollowed %s' % artist)
@@ -109,7 +109,7 @@ def unfollow_removed_artists(lib):
     Query for the artist id. If no results, unfollow the artist.
     """
 
-    for artistid, artist in removed_artists.iteritems():
+    for artistid, artist in removed_artists.items():
         query = dbcore.MatchQuery('mb_albumartistid', artistid)
         if not lib.items(query).get():
             unfollow_artist(artistid, artist)
@@ -150,7 +150,7 @@ class FollowPlugin(BeetsPlugin):
                 album = item.get_album()
                 if album:
                     track_removed_artists(album)
-            for artistid, artist in removed_artists.iteritems():
+            for artistid, artist in removed_artists.items():
                 unfollow_artist(artistid, artist)
         unfollow_cmd.func = unfollow
 
