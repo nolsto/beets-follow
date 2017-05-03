@@ -8,7 +8,7 @@ with open(path.join(here, 'README.rst')) as f:
 
 setup(
     name = 'beets-follow',
-    version = '1.0.0',
+    version = '1.0.1',
     description = 'Plugin for the music library manager Beets. Follow artists from your library using muspy.com',
     long_description = readme,
     url = 'https://github.com/nolsto/beets-follow',
@@ -18,11 +18,10 @@ setup(
     license = 'MIT',
     classifiers = [
         'License :: OSI Approved :: MIT License',
-        'Programming Language :: Python :: 2.6',
-        'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3.6',
     ],
     keywords = 'beets muspy',
     packages = ['beetsplug'],
     namespace_packages = ['beetsplug'],
-    install_requires = ['beets>=1.3.3'],
+    install_requires = ['beets>=1.4.3'],
 )
