@@ -3,7 +3,7 @@ Artist Follow Plugin for Beets
 
 Plugin for the music library manager,
 `Beets <http://beets.radbox.org/>`__. Get notifications about new
-releases from artists in your Beets library using
+releases from album artists in your Beets library using
 `muspy <https://muspy.com/>`__.
 
 Installation
@@ -82,8 +82,8 @@ syntax <http://beets.readthedocs.org/en/latest/reference/query.html>`__.
 All matched items will have their album artist (if one exists) added to
 muspy.
 
-If no query is included, all artists in your library will be added to
-muspy.
+If no query is included, all album artists in your library will be added
+to muspy.
 
 unfollow
 ~~~~~~~~
@@ -93,5 +93,5 @@ unfollow
 Similar to follow, all matched items will have their album artist (if
 one exists) removed from muspy.
 
-If no query is included, all artists in your library will be removed
+If no query is included, all album artists in your library will be removed
 from muspy.
