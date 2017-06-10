@@ -24,6 +24,5 @@ setup(
     ],
     keywords='beets muspy',
     packages=['beetsplug'],
-    namespace_packages=['beetsplug'],
     install_requires=['beets>=1.4.3'],
 )
